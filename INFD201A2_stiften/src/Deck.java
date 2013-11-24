@@ -7,13 +7,21 @@ import java.util.Arrays;
  *
  */
 public class Deck {
-	Card[] cardArray;
-
+    
+        private Card[] cardArray;
+        private Card[] tempCardArray;
+        
+        private int cardIndex;
+        private String suite;
+        private String cardName;
+          
+        private Card callCard_1;
+        private Card callCard_2;
 	/**
 	 * Constructor
 	 */
 	Deck(){
-		cardArray = new Card[0];
+		cardArray = new Card[52];
 	}
 
 	/**
@@ -21,6 +29,45 @@ public class Deck {
 	 * harten en ruiten.
 	 */
 	public void fillDeck() {
+            
+            for(int i = 0; i <= 3; i++) // suite
+            {
+                if(i==0){
+                        this.suite = "klaveren";
+                    }
+                else if(i==1){
+                        this.suite = "schoppen";
+                    }
+                else if(i==2){
+                        this.suite = "harten";
+                    }
+                else if(i==3){
+                        this.suite = "ruiten";
+                    }
+                for(int j = 2; j <= 14; j++) // suit-index
+                {
+                    if(j<=10){
+                        cardName = Integer.toString(j);
+                        }
+                    else if(j==11){
+                            cardName = "boer";
+                        }
+                    else if(j==12){
+                            cardName = "vrouw";
+                        }
+                    else if(j==13){
+                            cardName = "heer";
+                        }
+                    else // if(j==14)
+                    {
+                            cardName = "aas";
+                    }
+                    cardName = this.suite + " " + cardName;
+                    this.cardArray[this.cardIndex]=new Card(this.cardName);
+                    
+                    cardIndex++;
+                }
+            }
 	}
 
 	/**
@@ -34,6 +81,47 @@ public class Deck {
 	 *            Op positie
 	 */
 	public void insertAt(Card card, int index) {
+            int j = this.cardArray.length;
+            int newj = j+1;
+            
+            this.tempCardArray = new Card[newj];
+            
+            System.out.print(this.tempCardArray.length);
+            
+            
+            for( int i = 0 ; i < newj; i++){
+                if(i<index){
+                        this.tempCardArray[i] = this.cardArray[i];
+                    }
+                else if(i == index){
+                        this.tempCardArray[i] = card;
+                    }
+                else {
+                        this.tempCardArray[i] = this.cardArray[i-1];
+                }
+                
+                //check
+                    if(i < j){
+                        callCard_1 = this.cardArray[i];
+                    }
+                    callCard_2 = this.tempCardArray[i];
+                    
+                    if(i < cardArray.length){
+                        System.out.print(callCard_1.getName() + ":" + callCard_2.getName() + "\n");
+                    }
+                    else if(i == cardArray.length)
+                    {
+                      System.out.print(callCard_2.getName() + "\n");  
+                    }
+            }
+            
+            
+            
+            
+            //this.cardArray = null;
+            //this.cardArray = new Card[newj];
+            //this.cardArray = this.tempCardArray;
+            //this.tempCardArray = null;
 	}
 
 	/**

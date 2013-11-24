@@ -4,24 +4,25 @@
  *
  */
 public class Card {
-	/**
-	 * Klaver, Schoppen, Harten of Ruiten 
-	 * Hoeft niet persÈ van type Object te zijn,
-	 * vul zelf in
-	 */
-	Object suit;
 	
-	/**
-	 * 2,3,4,5,6,7,8,9,10,b,v,k,a
-	 * Hoeft niet persÈ van type Object te zijn,
-	 * vul zelf in
-	 */
-	Object number;
-	
+        Card card;
+        
+        private String cardName;
+        
+        public Card(String cardName){
+            //System.out.print("");
+            this.cardName = cardName;
+            System.out.print(this.cardName+"\n");
+        }
+        
+        public String getName(){
+            return this.cardName;
+        }
 	/**
 	 * Pretty-print deze Card als string
 	 */
 	public String toString(){
 		return "";
 	}
+
 }
