@@ -64,10 +64,10 @@ public class Deck {
                     }
                     cardName = this.suite + " " + cardName;
                     this.cardArray[this.cardIndex]=new Card(this.cardName);
-                    
                     cardIndex++;
                 }
             }
+            checkArray();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class Deck {
             
             this.tempCardArray = new Card[newj];
             
-            System.out.print(this.tempCardArray.length);
+            //System.out.print(this.tempCardArray.length);
             
             
             for( int i = 0 ; i < newj; i++){
@@ -101,6 +101,7 @@ public class Deck {
                 }
                 
                 //check
+                /*
                     if(i < j){
                         callCard_1 = this.cardArray[i];
                     }
@@ -113,17 +114,31 @@ public class Deck {
                     {
                       System.out.print(callCard_2.getName() + "\n");  
                     }
+                    * */
             }
             
-            
-            
-            
-            //this.cardArray = null;
-            //this.cardArray = new Card[newj];
-            //this.cardArray = this.tempCardArray;
-            //this.tempCardArray = null;
+            resetArray(newj);
+            checkArray();
 	}
 
+        public void resetArray(int number) {
+               // all data in old array, remove temp
+            this.cardArray = null;
+            this.cardArray = new Card[number];
+            this.cardArray = this.tempCardArray;
+            this.tempCardArray = null;
+        }
+        
+        public void checkArray() {
+               // all data in old array, remove temp
+            int imax = this.cardArray.length;
+            System.out.print("length: "+imax+"\n");
+            for( int i = 0 ; i < imax; i++){
+                System.out.print(i + ":"+ this.cardArray[i].getName() + "_;");
+            }
+            System.out.print("\n");
+        }
+        
 	/**
 	 * Kaarten kunnen ook verwijderd worden uit het deck. delete Haalt de kaart
 	 * met een bepaalde index er uit.
@@ -133,6 +148,29 @@ public class Deck {
 	 * @param index
 	 */
 	public void delete(int index) {
+            
+            int j = this.cardArray.length;
+            
+            this.tempCardArray = new Card[j-1];
+            
+            //System.out.print(this.tempCardArray.length);
+            
+            
+            for( int i = 0 ; i < j; i++){
+                if(i<index){
+                        this.tempCardArray[i] = this.cardArray[i];
+                    }
+                else if(i > index){
+                        this.tempCardArray[i-1] = this.cardArray[i];
+                }
+                else{
+                        this.tempCardArray[i] = null;
+                }
+            }
+            
+            //reset
+            resetArray(j);
+            checkArray();
 	}
 
 	/**
@@ -152,7 +190,26 @@ public class Deck {
 	 * @return De index van de gevonden kaart
 	 */
 	public int sequentialSearch(Card card) {
-		return 0;
+            int j = this.cardArray.length;
+            String toFind = card.getName();
+                System.out.print("\nFinding:..."+card.getName()+"\n");
+            int foundIndex = 0;
+            
+            for( int i = 0 ; i < j; i++){
+                
+                String current = this.cardArray[i].getName();
+                //System.out.print(current+"\n");
+                
+                if(toFind.equals(current)){
+                     foundIndex = i;
+                     break;
+                }
+                else
+                {
+                    foundIndex = 0;
+                }
+            }
+            return foundIndex;
 	}
 
 	/**

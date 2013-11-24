@@ -12,7 +12,7 @@ public class Card {
         public Card(String cardName){
             //System.out.print("");
             this.cardName = cardName;
-            System.out.print(this.cardName+"\n");
+            //System.out.print(this.cardName+"\n");
         }
         
         public String getName(){
